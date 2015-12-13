@@ -1,0 +1,7 @@
+export PATH=$PATH:**installpath**:**installpath**/dex2jar
+export PS1='(android-reverse) ${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+export REVERSEPATH=**installpath**
+
+alias hook-compile="javac -cp $REVERSEPATH/javassist.jar Hook.java"
+alias hook-run="java -cp $REVERSEPATH/javassist.jar:$REVERSEPATH/android.jar:. Hook"
+alias hook-create="cp $REVERSEPATH/Hook.java Hook.java"

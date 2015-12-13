@@ -1,0 +1,43 @@
+#!/bin/bash
+folder=`pwd`
+printf "folder to install [$folder]: "
+read new_folder
+if [[ "$new_folder" ]]
+then
+	folder=$new_folder
+fi
+
+if [ ! -d "$folder" ]
+then
+	mkdir -p $folder
+fi
+
+cp -r dex2jar $folder/dex2jar || exit 1
+cp -r apktool $folder/apktool || exit 1
+cp -r apktool.jar $folder/apktool.jar || exit 1
+cp -r android.jar $folder/android.jar || exit 1
+cp -r javassist.jar $folder/javassist.jar || exit 1
+cp -r jd-gui-1.4.0.jar $folder/jd-gui-1.4.0.jar || exit 1
+cp -r jd-core.jar $folder/jd-core.jar || exit 1
+cp -r jd-gui $folder/jd-gui || exit 1
+cp -r Hook.java $folder/Hook.java || exit 1
+cp -r apk-download.sh $folder/apk-download || exit 1
+cp -r apk-compile.sh $folder/apk-compile || exit 1
+cp -r apk-decompile.sh $folder/apk-decompile || exit 1
+
+chmod +x $folder/dex2jar
+chmod +x $folder/apktool
+chmod +x $folder/apktool.jar
+chmod +x $folder/android.jar
+chmod +x $folder/javassist.jar
+chmod +x $folder/jd-gui
+chmod +x $folder/jd-gui-1.4.0.jar
+chmod +x $folder/jd-core.jar
+chmod +x $folder/apk-download
+chmod +x $folder/apk-compile
+chmod +x $folder/apk-decompile
+
+p=${folder//\//\\/}
+sed -e "s/\*\*installpath\*\*/$p/g" activate > $folder/activate
+
+echo 'alias activate-android-reverse=". '$folder'/activate"' >> ~/.bashrc
